@@ -86,8 +86,7 @@ header h1 {
 .user {
   text-align: right;
   max-width: 80%;
-  margin-left: auto;
-  margin-bottom: 0.5vh;
+  margin-top: 0.5vh;
   margin-right: 1vh;
 }
 
@@ -103,7 +102,7 @@ header h1 {
 .bot {
   text-align: left;
   max-width: 80%;
-  margin-bottom: 0.5vh;
+  margin-top: 0.5vh;
   margin-left: 1vh;
 }
 
