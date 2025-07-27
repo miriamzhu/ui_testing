@@ -75,7 +75,7 @@
         document.getElementById("user-input").focus();
         appendUserMessage(userMessage);
 
-        //document.getElementById("loading").style.display = "block";
+        document.getElementById("loading").style.display = "block";
 
         if (currentAudio) {
             currentAudio.pause();
@@ -93,12 +93,12 @@
         })
         .then((response) => response.json())
         .then((data) => {
-            //document.getElementById("loading").style.display = "none";
+            document.getElementById("loading").style.display = "none";
             appendBotMessage(data.bot_response);
             document.getElementById("conversation").value = data.conversation;
         })
         .catch((error) => {
-            //document.getElementById("loading").style.display = "none";
+            document.getElementById("loading").style.display = "none";
             console.error("Error:", error);
         });
     }
