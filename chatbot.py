@@ -58,7 +58,7 @@ def chat():
             "conversation": updated_conversation
         })
 
-    return render_template("chat.html")
+    return render_template("index.html")
 
 
 @app.route("/set_scenario", methods=["POST"])
