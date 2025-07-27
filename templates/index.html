@@ -121,7 +121,36 @@
         document.getElementById("chat-box").appendChild(botMessageDiv);
         document.getElementById("chat-box").scrollTop = document.getElementById("chat-box").scrollHeight;
     }
-    
+
+    document.getElementById("end-btn").addEventListener("click", function () {
+        const conversation = document.getElementById("conversation").value;
+        document.getElementById("loading").style.display = "block";
+
+        if (currentAudio) {
+            currentAudio.pause();
+            currentAudio = null;
+        }
+
+        fetch("/", {
+            method: "POST",
+            body: new URLSearchParams({
+                user_input: "end conversation",
+                conversation: conversation,
+            }),
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded",
+            },
+        })
+        .then((response) => response.json())
+        .then((data) => {
+            document.getElementById("loading").style.display = "none";
+            appendBotMessage(data.bot_response);
+        })
+        .catch((error) => {
+            document.getElementById("loading").style.display = "none";
+            console.error("Error:", error);
+        });
+    });
   </script>
 </body>
 </html>
