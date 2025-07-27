@@ -113,3 +113,11 @@ header h1 {
   margin: 0;
   display: inline-block;
 }
+
+.loading {
+    display: none;
+    margin: 1vh 0;
+    color: #666;
+    text-align: center;
+    font-size: 1.2vh;
+}
