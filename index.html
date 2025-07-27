@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Standardized Patient LLM</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Standardized Patient LLM</h1>
+  </header>
+
+  <div class="instructions">
+    Please interact with the standardized patient (SP-LLM) either by typing or using voice input.
+  </div>
+
+  <div class="chat-box" id="chat-box">
+    <div class="bot">
+        <p>Welcome! I'm your standardized patient. Please begin your interview!</p>
+    </div>
+  </div>
+  <div class="user-input-wrapper">
+    <textarea class="user-input" id="user-input" placeholder="Type your message..."></textarea>
+    <div class="chat-buttons">
+      <!-- Button 1 -->
+      <button class="chat-btn" id="stop-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="46" height="46" viewBox="0 0 46 46" fill="none">
+          <circle cx="23" cy="23" r="23" fill="#DC3545"/>
+          <rect x="15.6227" y="15.6226" width="14.7547" height="14.7547" fill="white"/>
+        </svg>
+      </button>
+
+      <!-- Button 2 -->
+      <button class="chat-btn" id="mic-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="46" height="46" viewBox="0 0 46 46" fill="none">
+          <circle cx="23" cy="23" r="23" fill="#A1A1A1"/>
+          <path d="M13.8868 16.7484C12.9224 16.7484 12.1027 16.4108 11.4276 15.7358C10.7526 15.0607 10.4151 14.241 10.4151 13.2767V6.33327C10.4151 5.36891 10.7526 4.5492 11.4276 3.87415C12.1027 3.1991 12.9224 2.86157 13.8868 2.86157C14.8511 2.86157 15.6708 3.1991 16.3459 3.87415C17.0209 4.5492 17.3585 5.36891 17.3585 6.33327V13.2767C17.3585 14.241 17.0209 15.0607 16.3459 15.7358C15.6708 16.4108 14.8511 16.7484 13.8868 16.7484ZM12.7295 24.849V21.2905C10.7237 21.0205 9.06496 20.1236 7.75343 18.5999C6.4419 17.0762 5.78613 15.3018 5.78613 13.2767H8.1006C8.1006 14.8775 8.66475 16.2421 9.79305 17.3704C10.9214 18.4987 12.2859 19.0628 13.8868 19.0628C15.4876 19.0628 16.8522 18.4987 17.9805 17.3704C19.1088 16.2421 19.6729 14.8775 19.6729 13.2767H21.9874C21.9874 15.3018 21.3316 17.0762 20.0201 18.5999C18.7086 20.1236 17.0499 21.0205 15.044 21.2905V24.849H12.7295ZM13.8868 14.4339C14.2146 14.4339 14.4895 14.323 14.7113 14.1012C14.9331 13.8794 15.044 13.6045 15.044 13.2767V6.33327C15.044 6.00539 14.9331 5.73055 14.7113 5.50874C14.4895 5.28694 14.2146 5.17604 13.8868 5.17604C13.5589 5.17604 13.284 5.28694 13.0622 5.50874C12.8404 5.73055 12.7295 6.00539 12.7295 6.33327V13.2767C12.7295 13.6045 12.8404 13.8794 13.0622 14.1012C13.284 14.323 13.5589 14.4339 13.8868 14.4339Z" 
+            fill="white"
+            transform="translate(9,9)"
+          />
+        </svg>
+      </button>
+
+      <!-- Button 3 -->
+      <button class="chat-btn" id="send-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="46" height="46" viewBox="0 0 46 46" fill="none">
+          <circle cx="23" cy="23" r="23" fill="#4A90E2"/>
+          <path d="M16.9245 10.1874L16.9245 26.0378L14.3207 26.0378L14.3207 10.1874L7.03016 17.4779L5.20752 15.6227L15.6226 5.20765L26.0377 15.6227L24.2151 17.4779L16.9245 10.1874Z" 
+            fill="white"
+            transform="translate(7,7)"  
+          />
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <input type="hidden" id="conversation" value="">
+  
+  <script>
+    document.getElementById("send-btn").addEventListener("click", sendMessage);
+    document.getElementById("user-input").addEventListener("keypress", function (e) {
+        if (e.key === "Enter") {
+          e.preventDefault();
+          sendMessage();
+        }
+    });
+
+    function sendMessage() {
+        const userMessage = document.getElementById("user-input").value.trim();
+        if (userMessage === "") return;
+
+        const conversation = document.getElementById("conversation").value;
+        document.getElementById("user-input").value = "";
+        document.getElementById("user-input").focus();
+        appendUserMessage(userMessage);
+
+        //document.getElementById("loading").style.display = "block";
+
+        if (currentAudio) {
+            currentAudio.pause();
+        }
+
+        fetch("/", {
+            method: "POST",
+            body: new URLSearchParams({
+                user_input: userMessage,
+                conversation: conversation,
+            }),
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded",
+            },
+        })
+        .then((response) => response.json())
+        .then((data) => {
+            //document.getElementById("loading").style.display = "none";
+            appendBotMessage(data.bot_response);
+            document.getElementById("conversation").value = data.conversation;
+        })
+        .catch((error) => {
+            //document.getElementById("loading").style.display = "none";
+            console.error("Error:", error);
+        });
+    }
+
+    function appendUserMessage(message) {
+        const userMessageDiv = document.createElement("div");
+        userMessageDiv.className = "user";
+        userMessageDiv.innerHTML = `<p>${message}</p>`;
+        document.getElementById("chat-box").appendChild(userMessageDiv);
+        document.getElementById("chat-box").scrollTop = document.getElementById("chat-box").scrollHeight;
+    }
+
+    function appendBotMessage(message) {
+        const botMessageDiv = document.createElement("div");
+        botMessageDiv.className = "bot";
+        botMessageDiv.innerHTML = `<p>${message}</p>`;
+        document.getElementById("chat-box").appendChild(botMessageDiv);
+        document.getElementById("chat-box").scrollTop = document.getElementById("chat-box").scrollHeight;
+    }
+    
+  </script>
+</body>
+</html>
