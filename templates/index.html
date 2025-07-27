@@ -54,7 +54,8 @@
     </div>
   </div>
 
-  <input type="hidden" id="conversation" value="">
+  <div class="loading" id="loading">Generating response...</div>
+  <input type="hidden" id="conversation" value="[]">
   
   <script>
     document.getElementById("send-btn").addEventListener("click", sendMessage);
