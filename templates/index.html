@@ -126,11 +126,6 @@
         const conversation = document.getElementById("conversation").value;
         document.getElementById("loading").style.display = "block";
 
-        if (currentAudio) {
-            currentAudio.pause();
-            currentAudio = null;
-        }
-
         fetch("/", {
             method: "POST",
             body: new URLSearchParams({
