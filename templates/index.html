@@ -10,6 +10,18 @@
     <h1>Standardized Patient LLM</h1>
   </header>
 
+  <div class="sidebar" id="sidebar">
+    <button class="toggle-btn" id="toggleBtn" aria-label="Toggle Sidebar">
+      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
+        <path d="M4 24V21.3333H28V24H4ZM4 17.3333V14.6667H28V17.3333H4ZM4 10.6667V8H28V10.6667H4Z" fill="#444444"/>
+      </svg>
+    </button>
+    <!-- Add sidebar content below -->
+    <div class="sidebar-content">
+      <p>Sidebar content here</p>
+    </div>
+  </div>
+
   <div class="instructions">
     Please interact with the standardized patient (SP-LLM) either by typing or using voice input.
   </div>
@@ -145,6 +157,13 @@
             document.getElementById("loading").style.display = "none";
             console.error("Error:", error);
         });
+    });
+
+    const sidebar = document.getElementById('sidebar');
+    const toggleBtn = document.getElementById('toggleBtn');
+
+    toggleBtn.addEventListener('click', () => {
+      sidebar.classList.toggle('collapsed');
     });
   </script>
 </body>
