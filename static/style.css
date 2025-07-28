@@ -1,7 +1,15 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
   background-color: white;
   margin: 0;
+  height: 100vh;
   font-family: Arial, sans-serif;
+  display: flex;
 }
 
 header {
