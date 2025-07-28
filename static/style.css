@@ -172,3 +172,9 @@ header h1 {
   opacity: 0;
   pointer-events: none;
 }
+
+.main-content {
+  flex: 1;
+  padding: 24px;
+  background-color: #fff;
+}
