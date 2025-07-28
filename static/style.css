@@ -123,3 +123,27 @@ header h1 {
     text-align: center;
     font-size: 1.2vh;
 }
+
+/* Toggle Button */
+.toggle-btn {
+  width: 32px;
+  height: 32px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin: 16px;
+  padding: 0;
+  flex-shrink: 0;
+  z-index: 10;
+}
+
+/* Sidebar Content */
+.sidebar-content {
+  padding: 16px;
+  transition: opacity 0.3s ease;
+}
+
+.sidebar.collapsed .sidebar-content {
+  opacity: 0;
+  pointer-events: none;
+}
