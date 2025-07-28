@@ -6,63 +6,66 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-  <header>
-    <h1>Standardized Patient LLM</h1>
-  </header>
 
-  <div class="sidebar" id="sidebar">
-    <button class="toggle-btn" id="toggleBtn" aria-label="Toggle Sidebar">
-      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
-        <path d="M4 24V21.3333H28V24H4ZM4 17.3333V14.6667H28V17.3333H4ZM4 10.6667V8H28V10.6667H4Z" fill="#444444"/>
-      </svg>
-    </button>
-    <!-- Add sidebar content below -->
-    <div class="sidebar-content">
-      <p>Sidebar content here</p>
+  <div class="main-content">
+    <header>
+      <h1>Standardized Patient LLM</h1>
+    </header>
+  
+    <div class="sidebar" id="sidebar">
+      <button class="toggle-btn" id="toggleBtn" aria-label="Toggle Sidebar">
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
+          <path d="M4 24V21.3333H28V24H4ZM4 17.3333V14.6667H28V17.3333H4ZM4 10.6667V8H28V10.6667H4Z" fill="#444444"/>
+        </svg>
+      </button>
+      <!-- Add sidebar content below -->
+      <div class="sidebar-content">
+        <p>Sidebar content here</p>
+      </div>
     </div>
-  </div>
-
-  <div class="instructions">
-    Please interact with the standardized patient (SP-LLM) either by typing or using voice input.
-  </div>
-
-  <div class="chat-box" id="chat-box">
-    <div class="bot">
-        <p>Welcome! I'm your standardized patient. Please begin your interview!</p>
+  
+    <div class="instructions">
+      Please interact with the standardized patient (SP-LLM) either by typing or using voice input.
     </div>
-  </div>
-  <div class="user-input-wrapper">
-    <textarea class="user-input" id="user-input" placeholder="Type your message..."></textarea>
-    <div class="chat-buttons">
-      <!-- Button 1 -->
-      <button class="chat-btn" id="end-btn">
-        <svg xmlns="http://www.w3.org/2000/svg" width="46" height="46" viewBox="0 0 46 46" fill="none">
-          <circle cx="23" cy="23" r="23" fill="#DC3545"/>
-          <rect x="15.6227" y="15.6226" width="14.7547" height="14.7547" fill="white"/>
-        </svg>
-      </button>
-
-      <!-- Button 2 -->
-      <button class="chat-btn" id="mic-btn">
-        <svg xmlns="http://www.w3.org/2000/svg" width="46" height="46" viewBox="0 0 46 46" fill="none">
-          <circle cx="23" cy="23" r="23" fill="#A1A1A1"/>
-          <path d="M13.8868 16.7484C12.9224 16.7484 12.1027 16.4108 11.4276 15.7358C10.7526 15.0607 10.4151 14.241 10.4151 13.2767V6.33327C10.4151 5.36891 10.7526 4.5492 11.4276 3.87415C12.1027 3.1991 12.9224 2.86157 13.8868 2.86157C14.8511 2.86157 15.6708 3.1991 16.3459 3.87415C17.0209 4.5492 17.3585 5.36891 17.3585 6.33327V13.2767C17.3585 14.241 17.0209 15.0607 16.3459 15.7358C15.6708 16.4108 14.8511 16.7484 13.8868 16.7484ZM12.7295 24.849V21.2905C10.7237 21.0205 9.06496 20.1236 7.75343 18.5999C6.4419 17.0762 5.78613 15.3018 5.78613 13.2767H8.1006C8.1006 14.8775 8.66475 16.2421 9.79305 17.3704C10.9214 18.4987 12.2859 19.0628 13.8868 19.0628C15.4876 19.0628 16.8522 18.4987 17.9805 17.3704C19.1088 16.2421 19.6729 14.8775 19.6729 13.2767H21.9874C21.9874 15.3018 21.3316 17.0762 20.0201 18.5999C18.7086 20.1236 17.0499 21.0205 15.044 21.2905V24.849H12.7295ZM13.8868 14.4339C14.2146 14.4339 14.4895 14.323 14.7113 14.1012C14.9331 13.8794 15.044 13.6045 15.044 13.2767V6.33327C15.044 6.00539 14.9331 5.73055 14.7113 5.50874C14.4895 5.28694 14.2146 5.17604 13.8868 5.17604C13.5589 5.17604 13.284 5.28694 13.0622 5.50874C12.8404 5.73055 12.7295 6.00539 12.7295 6.33327V13.2767C12.7295 13.6045 12.8404 13.8794 13.0622 14.1012C13.284 14.323 13.5589 14.4339 13.8868 14.4339Z" 
-            fill="white"
-            transform="translate(9,9)"
-          />
-        </svg>
-      </button>
-
-      <!-- Button 3 -->
-      <button class="chat-btn" id="send-btn">
-        <svg xmlns="http://www.w3.org/2000/svg" width="46" height="46" viewBox="0 0 46 46" fill="none">
-          <circle cx="23" cy="23" r="23" fill="#4A90E2"/>
-          <path d="M16.9245 10.1874L16.9245 26.0378L14.3207 26.0378L14.3207 10.1874L7.03016 17.4779L5.20752 15.6227L15.6226 5.20765L26.0377 15.6227L24.2151 17.4779L16.9245 10.1874Z" 
-            fill="white"
-            transform="translate(7,7)"  
-          />
-        </svg>
-      </button>
+  
+    <div class="chat-box" id="chat-box">
+      <div class="bot">
+          <p>Welcome! I'm your standardized patient. Please begin your interview!</p>
+      </div>
+    </div>
+    <div class="user-input-wrapper">
+      <textarea class="user-input" id="user-input" placeholder="Type your message..."></textarea>
+      <div class="chat-buttons">
+        <!-- Button 1 -->
+        <button class="chat-btn" id="end-btn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="46" height="46" viewBox="0 0 46 46" fill="none">
+            <circle cx="23" cy="23" r="23" fill="#DC3545"/>
+            <rect x="15.6227" y="15.6226" width="14.7547" height="14.7547" fill="white"/>
+          </svg>
+        </button>
+  
+        <!-- Button 2 -->
+        <button class="chat-btn" id="mic-btn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="46" height="46" viewBox="0 0 46 46" fill="none">
+            <circle cx="23" cy="23" r="23" fill="#A1A1A1"/>
+            <path d="M13.8868 16.7484C12.9224 16.7484 12.1027 16.4108 11.4276 15.7358C10.7526 15.0607 10.4151 14.241 10.4151 13.2767V6.33327C10.4151 5.36891 10.7526 4.5492 11.4276 3.87415C12.1027 3.1991 12.9224 2.86157 13.8868 2.86157C14.8511 2.86157 15.6708 3.1991 16.3459 3.87415C17.0209 4.5492 17.3585 5.36891 17.3585 6.33327V13.2767C17.3585 14.241 17.0209 15.0607 16.3459 15.7358C15.6708 16.4108 14.8511 16.7484 13.8868 16.7484ZM12.7295 24.849V21.2905C10.7237 21.0205 9.06496 20.1236 7.75343 18.5999C6.4419 17.0762 5.78613 15.3018 5.78613 13.2767H8.1006C8.1006 14.8775 8.66475 16.2421 9.79305 17.3704C10.9214 18.4987 12.2859 19.0628 13.8868 19.0628C15.4876 19.0628 16.8522 18.4987 17.9805 17.3704C19.1088 16.2421 19.6729 14.8775 19.6729 13.2767H21.9874C21.9874 15.3018 21.3316 17.0762 20.0201 18.5999C18.7086 20.1236 17.0499 21.0205 15.044 21.2905V24.849H12.7295ZM13.8868 14.4339C14.2146 14.4339 14.4895 14.323 14.7113 14.1012C14.9331 13.8794 15.044 13.6045 15.044 13.2767V6.33327C15.044 6.00539 14.9331 5.73055 14.7113 5.50874C14.4895 5.28694 14.2146 5.17604 13.8868 5.17604C13.5589 5.17604 13.284 5.28694 13.0622 5.50874C12.8404 5.73055 12.7295 6.00539 12.7295 6.33327V13.2767C12.7295 13.6045 12.8404 13.8794 13.0622 14.1012C13.284 14.323 13.5589 14.4339 13.8868 14.4339Z" 
+              fill="white"
+              transform="translate(9,9)"
+            />
+          </svg>
+        </button>
+  
+        <!-- Button 3 -->
+        <button class="chat-btn" id="send-btn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="46" height="46" viewBox="0 0 46 46" fill="none">
+            <circle cx="23" cy="23" r="23" fill="#4A90E2"/>
+            <path d="M16.9245 10.1874L16.9245 26.0378L14.3207 26.0378L14.3207 10.1874L7.03016 17.4779L5.20752 15.6227L15.6226 5.20765L26.0377 15.6227L24.2151 17.4779L16.9245 10.1874Z" 
+              fill="white"
+              transform="translate(7,7)"  
+            />
+          </svg>
+        </button>
+      </div>
     </div>
   </div>
 
