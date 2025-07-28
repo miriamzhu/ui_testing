@@ -124,6 +124,23 @@ header h1 {
     font-size: 1.2vh;
 }
 
+/* Sidebar styles */
+.sidebar {
+  width: 365px;
+  height: 100vh;
+  background-color: #E9F7FF;
+  flex-shrink: 0;
+  position: relative;
+  transition: width 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.sidebar.collapsed {
+  width: 105px;
+}
+
 /* Toggle Button */
 .toggle-btn {
   width: 32px;
